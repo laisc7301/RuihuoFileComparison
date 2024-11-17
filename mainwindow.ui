@@ -20,7 +20,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="pathALabel">
           <property name="text">
            <string>文件A路径：</string>
           </property>
@@ -34,7 +34,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="pathBLabel">
           <property name="text">
            <string>文件B路径：</string>
           </property>
