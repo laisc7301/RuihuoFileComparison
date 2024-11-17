@@ -21,5 +21,7 @@ void MainWindow::on_startComparingButton_clicked()
 
     pathA = R"(C:\工作区\Workspace\test.txt)";
     pathB = R"(C:\工作区\Workspace\test2.txt)";
+
+    ui->pathALineEdit->setText(pathA);
 }
 
