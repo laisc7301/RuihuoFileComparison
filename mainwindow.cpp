@@ -16,6 +16,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_startComparingButton_clicked()
 {
+    QString pathA = ui->pathALineEdit->text();
+    QString pathB = ui->pathBLineEdit->text();
 
 }
 
