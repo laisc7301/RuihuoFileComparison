@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QFile>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -22,6 +24,8 @@ void MainWindow::on_startComparingButton_clicked()
     pathA = R"(C:\工作区\Workspace\test.txt)";
     pathB = R"(C:\工作区\Workspace\test2.txt)";
 
-    ui->pathALineEdit->setText(pathA);
+    //ui->pathALineEdit->setText(pathA);
+    QFile file(pathA);
+
 }
 

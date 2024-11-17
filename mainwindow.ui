@@ -70,7 +70,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QTextBrowser" name="textBrowser"/>
+         <widget class="QTextBrowser" name="outputTextBrowser"/>
         </item>
        </layout>
       </item>
