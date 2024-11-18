@@ -23,6 +23,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_startComparingButton_clicked()
 {
+    ui->startComparingButton->setEnabled(false);
     QByteArray buffer1, buffer2;
     const qint64 bufferSize = 4096; // 每次读取 4KB
     long frequency = 0;
@@ -111,7 +112,7 @@ end1:;
     }
 
 
-
+    ui->startComparingButton->setEnabled(true);
 }
 
 
