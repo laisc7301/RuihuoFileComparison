@@ -29,25 +29,14 @@ void MainWindow::on_startComparingButton_clicked()
     //pathB = R"(C:\工作区\Workspace\test2.txt)";
 
     //ui->pathALineEdit->setText(pathA);
-    QFile file(pathA);
+    QFile fileA1(pathA);
+    QFile fileB1(pathB);
 
-    if (file.exists()) {
+    if (fileA1.exists()&&fileB1.exists()) {
         qDebug() << "找到文件:" << pathA;
-        //file.open(QIODevice::ReadOnly | QIODevice::Text);
 
+        fileA1.close();
 
-        if (file.open(QIODevice::ReadOnly)) {
-
-
-
-        }else{
-            qDebug() << "无法打开文件:" << file.errorString();
-            return;
-        }
-
-        //QString content = file.readAll();
-        file.close();
-        //qDebug() << content;
     }else {
         qDebug() << "文件不存在:" << pathA;
     }
