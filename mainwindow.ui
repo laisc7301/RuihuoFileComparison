@@ -27,7 +27,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="pathALineEdit"/>
+         <widget class="QLineEdit" name="pathALineEdit">
+          <property name="text">
+           <string>C:\工作区\Workspace\test.txt</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -41,7 +45,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="pathBLineEdit"/>
+         <widget class="QLineEdit" name="pathBLineEdit">
+          <property name="text">
+           <string>C:\工作区\Workspace\test2.txt</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
