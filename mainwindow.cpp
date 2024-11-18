@@ -22,6 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_startComparingButton_clicked()
 {
+
     QString pathA = ui->pathALineEdit->text();
     QString pathB = ui->pathBLineEdit->text();
 
@@ -33,12 +34,29 @@ void MainWindow::on_startComparingButton_clicked()
     QFile fileB1(pathB);
 
     if (fileA1.exists()&&fileB1.exists()) {
-        qDebug() << "找到文件:" << pathA;
+        //qDebug() << "找到文件:" << pathA;
+
+        // 尝试打开两个文件
+        if (!fileA1.open(QIODevice::ReadOnly)) {
+            qWarning() << "无法打开文件1:" << pathA;
+
+        }
+        if (!fileB1.open(QIODevice::ReadOnly)) {
+            qWarning() << "无法打开文件2:" << pathB;
+
+        }
 
         fileA1.close();
+        fileB1.close();
 
     }else {
-        qDebug() << "文件不存在:" << pathA;
+
+        if(!fileA1.exists()){
+            qDebug() << "文件A不存在:" << pathA;
+        }
+        if(!fileB1.exists()){
+            qDebug() << "文件B不存在:" << pathB;
+        }
     }
 
 
