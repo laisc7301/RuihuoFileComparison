@@ -25,6 +25,7 @@ void MainWindow::on_startComparingButton_clicked()
 {
     QByteArray buffer1, buffer2;
     const qint64 bufferSize = 4096; // 每次读取 4KB
+    long frequency = 0;
 
     QString pathA = ui->pathALineEdit->text();
     QString pathB = ui->pathBLineEdit->text();
@@ -64,13 +65,23 @@ void MainWindow::on_startComparingButton_clicked()
             buffer1 = fileA1.read(bufferSize);
             buffer2 = fileB1.read(bufferSize);
 
+
+            qDebug() << 1.0*frequency*bufferSize/fileA1.size();
+            int schedule = qFloor(1.0*frequency*bufferSize/fileA1.size()*100);
+            if(schedule>100){
+                schedule = 100;
+            }
+
+            qDebug() << schedule;
+
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";
                 goto FileInconsistency;
             }
+            frequency++;
         }
         // 如果文件完全相同，返回 true
-        qDebug() << "文件一致";
+        qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
 
 
 
