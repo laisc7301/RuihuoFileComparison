@@ -113,10 +113,7 @@ end1:;
 
     }
 
-//    QTimer::singleShot(2000, []() {
-//        ui->startComparingButton->setEnabled(true);
-//        qDebug() << "工作完成！";
-//    });
+
 
     QPointer<QPushButton> button = ui->startComparingButton;
     QTimer::singleShot(200, [button]() {
