@@ -65,8 +65,11 @@ void MainWindow::on_startComparingButton_clicked()
 
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";
+                goto FileInconsistency;
             }
         }
+
+        qDebug() << "文件一致";
 
         // 如果文件完全相同，返回 true
         //return true;
