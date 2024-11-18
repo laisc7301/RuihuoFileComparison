@@ -31,11 +31,28 @@ void MainWindow::on_startComparingButton_clicked()
     //ui->pathALineEdit->setText(pathA);
     QFile file(pathA);
 
-    if (!file.exists()) {
-        qDebug() << "文件不存在:" << pathA;
-    }else {
+    if (file.exists()) {
         qDebug() << "找到文件:" << pathA;
+        //file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+
+        if (file.open(QIODevice::ReadOnly)) {
+
+
+
+        }else{
+            qDebug() << "无法打开文件:" << file.errorString();
+            return;
+        }
+
+        //QString content = file.readAll();
+        file.close();
+        //qDebug() << content;
+    }else {
+        qDebug() << "文件不存在:" << pathA;
     }
+
+
 
 }
 
