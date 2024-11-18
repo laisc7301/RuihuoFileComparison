@@ -73,14 +73,17 @@ void MainWindow::on_startComparingButton_clicked()
             }
 
             qDebug() << schedule;
+            ui->progressBar->setValue(schedule);
 
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";
                 goto FileInconsistency;
             }
             frequency++;
+            QThread::msleep(500); // 毫秒级
         }
         // 如果文件完全相同，返回 true
+        ui->progressBar->setValue(100);
         qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
 
 
