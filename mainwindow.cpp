@@ -98,3 +98,9 @@ end1:;
 
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
