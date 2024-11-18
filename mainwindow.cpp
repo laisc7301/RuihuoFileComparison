@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QFile>
+#include <QThread>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -92,6 +93,7 @@ end1:;
         if(!fileB1.exists()){
             qDebug() << "文件B不存在:" << pathB;
         }
+
     }
 
 
@@ -101,6 +103,10 @@ end1:;
 
 void MainWindow::on_pushButton_clicked()
 {
+    QThread::msleep(1000); // 毫秒级
+    ui->progressBar->setValue(50);
+    QThread::msleep(1000); // 毫秒级
+    ui->progressBar->setValue(90);
 
 }
 

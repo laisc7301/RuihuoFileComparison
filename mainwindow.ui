@@ -65,14 +65,15 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>test1</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
+        <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>test1</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -80,6 +81,20 @@
          <widget class="QLabel" name="label_3">
           <property name="text">
            <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_7">
+        <item>
+         <widget class="QProgressBar" name="progressBar">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="value">
+           <number>24</number>
           </property>
          </widget>
         </item>
