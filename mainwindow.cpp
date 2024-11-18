@@ -68,11 +68,10 @@ void MainWindow::on_startComparingButton_clicked()
                 goto FileInconsistency;
             }
         }
-
+        // 如果文件完全相同，返回 true
         qDebug() << "文件一致";
 
-        // 如果文件完全相同，返回 true
-        //return true;
+
 
 
 FileInconsistency:;
