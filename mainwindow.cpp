@@ -39,17 +39,44 @@ void MainWindow::on_startComparingButton_clicked()
         // 尝试打开两个文件
         if (!fileA1.open(QIODevice::ReadOnly)) {
             qWarning() << "无法打开文件1:" << pathA;
+            goto end1;
 
         }
         if (!fileB1.open(QIODevice::ReadOnly)) {
             qWarning() << "无法打开文件2:" << pathB;
+            goto end1;
 
         }
 
         // 检查文件大小是否一致
         if (fileA1.size() != fileB1.size()) {
-
+            qDebug() << "文件大小不一致";
+            goto end1;
         }
+
+
+        // 对比文件内容
+        QByteArray buffer1, buffer2;
+        const qint64 bufferSize = 4096; // 每次读取 4KB
+        while (!fileA1.atEnd() && !fileB1.atEnd()) {
+            buffer1 = fileA1.read(bufferSize);
+            buffer2 = fileB1.read(bufferSize);
+
+            if (buffer1 != buffer2) {
+                qDebug() << "文件不一致";
+            }
+        }
+
+        // 如果文件完全相同，返回 true
+        //return true;
+
+
+
+
+
+        qDebug() << "ok1122";
+
+end1:;
 
         fileA1.close();
         fileB1.close();
