@@ -22,6 +22,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_startComparingButton_clicked()
 {
+    QByteArray buffer1, buffer2;
+    const qint64 bufferSize = 4096; // 每次读取 4KB
 
     QString pathA = ui->pathALineEdit->text();
     QString pathB = ui->pathBLineEdit->text();
@@ -56,8 +58,7 @@ void MainWindow::on_startComparingButton_clicked()
 
 
         // 对比文件内容
-        QByteArray buffer1, buffer2;
-        const qint64 bufferSize = 4096; // 每次读取 4KB
+
         while (!fileA1.atEnd() && !fileB1.atEnd()) {
             buffer1 = fileA1.read(bufferSize);
             buffer2 = fileB1.read(bufferSize);
@@ -71,7 +72,7 @@ void MainWindow::on_startComparingButton_clicked()
         //return true;
 
 
-
+FileInconsistency:;
 
 
         qDebug() << "ok1122";
