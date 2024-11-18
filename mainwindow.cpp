@@ -3,6 +3,8 @@
 
 #include <QFile>
 #include <QThread>
+#include <QTimer>
+#include <QPointer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -111,8 +113,22 @@ end1:;
 
     }
 
+//    QTimer::singleShot(2000, []() {
+//        ui->startComparingButton->setEnabled(true);
+//        qDebug() << "工作完成！";
+//    });
 
-    ui->startComparingButton->setEnabled(true);
+    QPointer<QPushButton> button = ui->startComparingButton;
+    QTimer::singleShot(200, [button]() {
+        if (button) {
+            button->setEnabled(true);
+            qDebug() << "工作完成！";
+        }
+    });
+
+
+
+    //ui->startComparingButton->setEnabled(true);
 }
 
 
