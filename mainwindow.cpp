@@ -46,6 +46,11 @@ void MainWindow::on_startComparingButton_clicked()
 
         }
 
+        // 检查文件大小是否一致
+        if (fileA1.size() != fileB1.size()) {
+
+        }
+
         fileA1.close();
         fileB1.close();
 
