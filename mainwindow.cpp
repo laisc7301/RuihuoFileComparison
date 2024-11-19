@@ -5,6 +5,7 @@
 #include <QThread>
 #include <QTimer>
 #include <QPointer>
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -26,6 +27,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
+    QDateTime dateTime= QDateTime::currentDateTime();//获取系统当前的时间
+        QString timeStr = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
     QByteArray buffer1, buffer2;
     const qint64 bufferSize = 4096; // 每次读取 4KB
     long frequency = 0;
