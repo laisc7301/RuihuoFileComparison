@@ -48,17 +48,19 @@ void MainWindow::on_startComparingButton_clicked()
     QFile fileA1(pathA);
     QFile fileB1(pathB);
 
-    if (fileA1.exists()&&fileB1.exists()) {
+    if (fileA1.exists()&&fileB1.exists()||true) {
         //qDebug() << "找到文件:" << pathA;
 
         // 尝试打开两个文件
         if (!fileA1.open(QIODevice::ReadOnly)) {
             qWarning() << "无法打开文件1:" << pathA;
+            ui->outputTextBrowser->append("无法打开文件A:"+pathA);
             goto end1;
 
         }
         if (!fileB1.open(QIODevice::ReadOnly)) {
             qWarning() << "无法打开文件2:" << pathB;
+            ui->outputTextBrowser->append("无法打开文件B:"+pathB);
             goto end1;
 
         }
