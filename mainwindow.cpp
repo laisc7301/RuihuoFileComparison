@@ -27,6 +27,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
+    numberOfComparisons++;
     bool ifSame = false;
     ui->outputTextBrowser->clear();
     this->repaint(); // 立即刷新
@@ -121,10 +122,10 @@ void MainWindow::on_startComparingButton_clicked()
 
         if (ifSame){
             QString outputHtml = ui->outputTextBrowser->toHtml();
-            ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b>"+timeStr+"<br/>"+outputHtml);
+            ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b>"+QString::number(numberOfComparisons)+timeStr+"<br/>"+outputHtml);
         }else{
             QString outputHtml = ui->outputTextBrowser->toHtml();
-            ui->outputTextBrowser->setHtml("<b><span style='color:red;font-size:24px;'>文件不相同</span></b>"+timeStr+"<br/>"+outputHtml);
+            ui->outputTextBrowser->setHtml("<b><span style='color:red;font-size:24px;'>文件不相同</span></b>"+QString::number(numberOfComparisons)+timeStr+"<br/>"+outputHtml);
         }
 
 end1:;
