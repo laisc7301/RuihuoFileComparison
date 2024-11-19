@@ -97,32 +97,42 @@ void MainWindow::on_startComparingButton_clicked()
                 qDebug() << "文件不一致";
                 ui->outputTextBrowser->append("文件不一致");
                 ui->progressBar->setValue(100);
-                goto FileInconsistency;
+                goto JumpOutComparison;
             }
             frequency++;
-            QThread::msleep(500); // 毫秒级
+            QThread::msleep(100); // 毫秒级
         }
         // 如果文件完全相同，返回 true
         ui->progressBar->setValue(100);
         qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
         ifSame = true;
-        if (ifSame){
-            QString outputHtml = ui->outputTextBrowser->toHtml();
-            ui->outputTextBrowser->setHtml("<b>文件相同</b>"+timeStr+"<br/>"+outputHtml);
-        }
 
 
 
 
-FileInconsistency:;
+
+//FileInconsistency:;
+
+        JumpOutComparison:;
+
 
 
         qDebug() << "ok1122";
+
+        if (ifSame){
+            QString outputHtml = ui->outputTextBrowser->toHtml();
+            ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b>"+timeStr+"<br/>"+outputHtml);
+        }else{
+            QString outputHtml = ui->outputTextBrowser->toHtml();
+            ui->outputTextBrowser->setHtml("<b><span style='color:red;font-size:24px;'>文件不相同</span></b>"+timeStr+"<br/>"+outputHtml);
+        }
 
 end1:;
 
         fileA1.close();
         fileB1.close();
+
+
 
     }else {
 
