@@ -15,6 +15,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    long numberOfComparisons = 0;
+
 
 private slots:
     void on_startComparingButton_clicked();
