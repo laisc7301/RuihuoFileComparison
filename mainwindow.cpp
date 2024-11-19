@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
-    numberOfComparisons++;
+
     bool ifSame = false;
     ui->outputTextBrowser->clear();
     this->repaint(); // 立即刷新
@@ -69,12 +69,14 @@ void MainWindow::on_startComparingButton_clicked()
 
         }
 
+        numberOfComparisons++;
+
         // 检查文件大小是否一致
         if (fileA1.size() != fileB1.size()) {
             qDebug() << "文件大小不一致";
             ui->outputTextBrowser->append("文件大小不一致");
             this->repaint(); // 立即刷新
-            goto end1;
+            goto JumpOutComparison;
         }
 
 
@@ -122,10 +124,10 @@ void MainWindow::on_startComparingButton_clicked()
 
         if (ifSame){
             QString outputHtml = ui->outputTextBrowser->toHtml();
-            ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b><span style='color:blue;'>"+QString::number(numberOfComparisons)+"</span>"+timeStr+"<br/>"+outputHtml);
+            ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outputHtml);
         }else{
             QString outputHtml = ui->outputTextBrowser->toHtml();
-            ui->outputTextBrowser->setHtml("<b><span style='color:red;font-size:24px;'>文件不相同</span></b><span style='color:blue;'>"+QString::number(numberOfComparisons)+"</span>"+timeStr+"<br/>"+outputHtml);
+            ui->outputTextBrowser->setHtml("<b><span style='color:red;font-size:24px;'>文件不相同</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outputHtml);
         }
 
 end1:;
