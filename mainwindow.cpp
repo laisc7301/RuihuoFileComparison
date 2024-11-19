@@ -122,10 +122,10 @@ void MainWindow::on_startComparingButton_clicked()
 
         if (ifSame){
             QString outputHtml = ui->outputTextBrowser->toHtml();
-            ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b>"+QString::number(numberOfComparisons)+timeStr+"<br/>"+outputHtml);
+            ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b><span style='color:blue;'>"+QString::number(numberOfComparisons)+"</span>"+timeStr+"<br/>"+outputHtml);
         }else{
             QString outputHtml = ui->outputTextBrowser->toHtml();
-            ui->outputTextBrowser->setHtml("<b><span style='color:red;font-size:24px;'>文件不相同</span></b>"+QString::number(numberOfComparisons)+timeStr+"<br/>"+outputHtml);
+            ui->outputTextBrowser->setHtml("<b><span style='color:red;font-size:24px;'>文件不相同</span></b><span style='color:blue;'>"+QString::number(numberOfComparisons)+"</span>"+timeStr+"<br/>"+outputHtml);
         }
 
 end1:;
