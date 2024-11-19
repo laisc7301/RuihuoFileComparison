@@ -27,6 +27,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
+    bool ifSame = false;
     ui->outputTextBrowser->clear();
     this->repaint(); // 立即刷新
     //QThread::msleep(1000); // 毫秒级
@@ -70,6 +71,8 @@ void MainWindow::on_startComparingButton_clicked()
         // 检查文件大小是否一致
         if (fileA1.size() != fileB1.size()) {
             qDebug() << "文件大小不一致";
+            ui->outputTextBrowser->append("文件大小不一致");
+            this->repaint(); // 立即刷新
             goto end1;
         }
 
@@ -100,6 +103,7 @@ void MainWindow::on_startComparingButton_clicked()
         // 如果文件完全相同，返回 true
         ui->progressBar->setValue(100);
         qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
+        ifSame = true;
 
 
 
