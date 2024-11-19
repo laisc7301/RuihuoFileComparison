@@ -106,6 +106,10 @@ void MainWindow::on_startComparingButton_clicked()
         ui->progressBar->setValue(100);
         qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
         ifSame = true;
+        if (ifSame){
+            QString outputHtml = ui->outputTextBrowser->toHtml();
+            ui->outputTextBrowser->setHtml("<b>文件相同</b>"+timeStr+"<br/>"+outputHtml);
+        }
 
 
 
