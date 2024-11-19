@@ -27,8 +27,13 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
+    ui->outputTextBrowser->clear();
+    this->repaint(); // 立即刷新
+    //QThread::msleep(1000); // 毫秒级
+
     QDateTime dateTime= QDateTime::currentDateTime();//获取系统当前的时间
-        QString timeStr = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
+    QString timeStr = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
+
     QByteArray buffer1, buffer2;
     const qint64 bufferSize = 4096; // 每次读取 4KB
     long frequency = 0;
@@ -109,9 +114,11 @@ end1:;
 
         if(!fileA1.exists()){
             qDebug() << "文件A不存在:" << pathA;
+            ui->outputTextBrowser->append("文件A不存在:"+pathA);
         }
         if(!fileB1.exists()){
             qDebug() << "文件B不存在:" << pathB;
+            ui->outputTextBrowser->append("文件B不存在:"+pathB);
         }
 
     }
