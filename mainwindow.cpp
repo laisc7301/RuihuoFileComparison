@@ -131,10 +131,13 @@ end1:;
 
 void MainWindow::on_pushButton_clicked()
 {
+    ui->outputTextBrowser->append("<b>123</b>");
+    this->repaint(); // 立即刷新
     QThread::msleep(1000); // 毫秒级
-    ui->progressBar->setValue(50);
+    //ui->progressBar->setValue(50);
     QThread::msleep(1000); // 毫秒级
     ui->progressBar->setValue(90);
+    ui->outputTextBrowser->append("<b>456</b>");
 
 }
 

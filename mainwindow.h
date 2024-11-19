@@ -16,8 +16,6 @@ public:
     ~MainWindow();
 
 
-
-
 private slots:
     void on_startComparingButton_clicked();
 
