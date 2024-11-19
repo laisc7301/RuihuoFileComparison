@@ -55,12 +55,14 @@ void MainWindow::on_startComparingButton_clicked()
         if (!fileA1.open(QIODevice::ReadOnly)) {
             qWarning() << "无法打开文件1:" << pathA;
             ui->outputTextBrowser->append("无法打开文件A:"+pathA);
+            this->repaint(); // 立即刷新
             goto end1;
 
         }
         if (!fileB1.open(QIODevice::ReadOnly)) {
             qWarning() << "无法打开文件2:" << pathB;
             ui->outputTextBrowser->append("无法打开文件B:"+pathB);
+            this->repaint(); // 立即刷新
             goto end1;
 
         }
