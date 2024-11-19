@@ -27,6 +27,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
+    this->repaint(); // 立即刷新
 
     bool ifSame = false;
     ui->outputTextBrowser->clear();
@@ -50,7 +51,7 @@ void MainWindow::on_startComparingButton_clicked()
     QFile fileA1(pathA);
     QFile fileB1(pathB);
 
-    if (fileA1.exists()&&fileB1.exists()||true) {
+    if (fileA1.exists()&&fileB1.exists()) {
         //qDebug() << "找到文件:" << pathA;
 
         // 尝试打开两个文件
@@ -153,7 +154,7 @@ end1:;
 
 
     QPointer<QPushButton> button = ui->startComparingButton;
-    QTimer::singleShot(200, [button]() {
+    QTimer::singleShot(20, [button]() {
         if (button) {
             button->setEnabled(true);
             qDebug() << "工作完成！";
