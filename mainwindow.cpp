@@ -95,6 +95,8 @@ void MainWindow::on_startComparingButton_clicked()
 
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";
+                ui->outputTextBrowser->append("文件不一致");
+                ui->progressBar->setValue(100);
                 goto FileInconsistency;
             }
             frequency++;
