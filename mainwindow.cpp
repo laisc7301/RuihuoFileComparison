@@ -168,17 +168,16 @@ end1:;
 
 
 
-    QPointer<QPushButton> button = ui->startComparingButton;
-    QPointer<QPushButton> resetbutton = ui->resetButton;
-    QTimer::singleShot(50, [button,resetbutton]() {
-        if (button) {
-            button->setText("开始对比");
-            button->setStyleSheet("background-color: #ffffff;");
-            resetbutton->setStyleSheet("background-color: #ffffff;");
-            button->setEnabled(true);
-            resetbutton->setEnabled(true);
-            qDebug() << "工作完成！";
-        }
+
+    QTimer::singleShot(50, [this]() {
+
+        ui->startComparingButton->setText("开始对比");
+        ui->startComparingButton->setStyleSheet("background-color: #ffffff;");
+        ui->resetButton->setStyleSheet("background-color: #ffffff;");
+        ui->startComparingButton->setEnabled(true);
+        ui->resetButton->setEnabled(true);
+        qDebug() << "工作完成！";
+
     });
 
 
