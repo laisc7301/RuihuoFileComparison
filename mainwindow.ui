@@ -48,7 +48,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="pathBLineEdit">
+         <widget class="DragLineEdit" name="pathBLineEdit">
           <property name="text">
            <string>C:\工作区\Workspace\tt2.png</string>
           </property>
