@@ -195,6 +195,19 @@ void MainWindow::on_pushButton_clicked()
 }
 
 
+void MainWindow::on_pathALineEdit_textEdited(const QString &arg1)
+{
+
+}
+
+
+void MainWindow::on_pathBLineEdit_textEdited(const QString &arg1)
+{
+    qDebug()<<"textEdited";
+}
+
+
+
 void MainWindow::on_resetButton_clicked()
 {
     ui->pathALineEdit->clear();
@@ -205,14 +218,7 @@ void MainWindow::on_resetButton_clicked()
 }
 
 
-void MainWindow::on_pathBLineEdit_textEdited(const QString &arg1)
-{
-    qDebug()<<"textEdited";
-}
 
 
-void MainWindow::on_pathALineEdit_textEdited(const QString &arg1)
-{
 
-}
 
