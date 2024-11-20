@@ -176,6 +176,10 @@ end1:;
         ui->resetButton->setStyleSheet("background-color: #ffffff;");
         ui->startComparingButton->setEnabled(true);
         ui->resetButton->setEnabled(true);
+        ui->pathALineEdit->setEnabled(true);
+        ui->pathBLineEdit->setEnabled(true);
+
+
         qDebug() << "工作完成！";
 
     });
