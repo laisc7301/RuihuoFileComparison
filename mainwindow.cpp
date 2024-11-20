@@ -113,6 +113,7 @@ void MainWindow::on_startComparingButton_clicked()
         // 如果文件完全相同
         ui->progressBar->setValue(100);
         qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
+        ui->outputTextBrowser->append("文件一致");
         ui->infoLabel->setText("完成！");
         ifSame = true;
 
@@ -146,11 +147,11 @@ end1:;
     }else {
 
         if(!fileA1.exists()){
-            qDebug() << "文件A不存在:" << pathA;
+
             ui->outputTextBrowser->append("文件A不存在:"+pathA);
         }
         if(!fileB1.exists()){
-            qDebug() << "文件B不存在:" << pathB;
+
             ui->outputTextBrowser->append("文件B不存在:"+pathB);
         }
 
