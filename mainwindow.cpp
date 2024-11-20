@@ -29,6 +29,7 @@ void MainWindow::on_startComparingButton_clicked()
     ui->startComparingButton->setEnabled(false);
     ui->startComparingButton->setStyleSheet("background-color: #99a3a4;");
     ui->startComparingButton->setText("正在对比...");
+    ui->infoLabel->setText("");
 
     this->repaint(); // 立即刷新
 
@@ -103,6 +104,7 @@ void MainWindow::on_startComparingButton_clicked()
                 qDebug() << "文件不一致";
                 ui->outputTextBrowser->append("文件不一致");
                 ui->progressBar->setValue(100);
+                ui->infoLabel->setText("完成！");
                 goto JumpOutComparison;
             }
             frequency++;
