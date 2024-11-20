@@ -25,7 +25,9 @@ void DragLineEdit::dropEvent(QDropEvent *event)
         if (!urls.isEmpty()) {
             QString filePath = urls.first().toLocalFile(); // 获取第一个文件路径
             setText(filePath); // 将路径填入 QLineEdit
+            emit textEdited(filePath); // 手动触发 textEdited 信号
             qDebug() << "Dropped file path:" << filePath;
+
         }
     }
 }

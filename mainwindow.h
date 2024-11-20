@@ -25,6 +25,10 @@ private slots:
 
     void on_resetButton_clicked();
 
+    void on_pathBLineEdit_textEdited(const QString &arg1);
+
+    void on_pathALineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 };

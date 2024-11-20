@@ -204,3 +204,15 @@ void MainWindow::on_resetButton_clicked()
     ui->outputTextBrowser->clear();
 }
 
+
+void MainWindow::on_pathBLineEdit_textEdited(const QString &arg1)
+{
+    qDebug()<<"textEdited";
+}
+
+
+void MainWindow::on_pathALineEdit_textEdited(const QString &arg1)
+{
+
+}
+
