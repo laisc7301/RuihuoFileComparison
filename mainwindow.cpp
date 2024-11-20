@@ -27,6 +27,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
+    ui->startComparingButton->setStyleSheet("background-color: #99a3a4;");
+
     this->repaint(); // 立即刷新
 
     bool ifSame = false;
@@ -111,6 +113,7 @@ void MainWindow::on_startComparingButton_clicked()
         // 如果文件完全相同，返回 true
         ui->progressBar->setValue(100);
         qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
+        ui->infoLabel->setText("完成！");
         ifSame = true;
 
 
@@ -158,6 +161,7 @@ end1:;
     QPointer<QPushButton> button = ui->startComparingButton;
     QTimer::singleShot(20, [button]() {
         if (button) {
+            button->setStyleSheet("background-color: #ffffff;");
             button->setEnabled(true);
             qDebug() << "工作完成！";
         }
