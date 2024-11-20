@@ -97,6 +97,7 @@ void MainWindow::on_startComparingButton_clicked()
 
             qDebug() << scheduleInt;
             ui->progressBar->setValue(scheduleInt);
+            ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数);
 
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";
