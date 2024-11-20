@@ -29,9 +29,14 @@ void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
     ui->resetButton->setEnabled(false);
+    ui->pathALineEdit->setEnabled(false);
+    ui->pathBLineEdit->setEnabled(false);
     ui->startComparingButton->setStyleSheet("background-color: #99a3a4;");
     ui->startComparingButton->setText("正在对比...");
+    ui->pathALineEdit->setStyleSheet("background-color: #e5e7e9;");
+    ui->pathBLineEdit->setStyleSheet("background-color: #e5e7e9;");
     ui->infoLabel->setText("");
+    ui->infoLabel->setStyleSheet("color:#000000;");
     ui->resetButton->setStyleSheet("background-color: #99a3a4;");
 
     this->repaint(); // 立即刷新
