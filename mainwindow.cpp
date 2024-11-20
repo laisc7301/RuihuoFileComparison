@@ -127,7 +127,7 @@ void MainWindow::on_startComparingButton_clicked()
 
 
 
-        qDebug() << "ok1122";
+        //qDebug() << "ok1122";
 
         if (ifSame){
             QString outputHtml = ui->outputTextBrowser->toHtml();
