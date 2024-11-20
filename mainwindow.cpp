@@ -89,13 +89,14 @@ void MainWindow::on_startComparingButton_clicked()
 
 
             qDebug() << 1.0*frequency*bufferSize/fileA1.size();
-            int schedule = qFloor(1.0*frequency*bufferSize/fileA1.size()*100);
-            if(schedule>100){
-                schedule = 100;
+            double scheduleDouble = 1.0*frequency*bufferSize/fileA1.size()*100;
+            int scheduleInt = qFloor(scheduleDouble);
+            if(scheduleInt>100){
+                scheduleInt = 100;
             }
 
-            qDebug() << schedule;
-            ui->progressBar->setValue(schedule);
+            qDebug() << scheduleInt;
+            ui->progressBar->setValue(scheduleInt);
 
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";

@@ -80,7 +80,7 @@
         <item>
          <widget class="QLabel" name="infoLabel">
           <property name="text">
-           <string>TextLabel</string>
+           <string/>
           </property>
          </widget>
         </item>
