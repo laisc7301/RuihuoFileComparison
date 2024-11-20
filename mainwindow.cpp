@@ -125,9 +125,9 @@ void MainWindow::on_startComparingButton_clicked()
 
 
 
-//FileInconsistency:;
+        //FileInconsistency:;
 
-        JumpOutComparison:;
+JumpOutComparison:;
 
 
 
@@ -195,15 +195,19 @@ void MainWindow::on_pushButton_clicked()
 }
 
 
+
 void MainWindow::on_pathALineEdit_textEdited(const QString &arg1)
 {
+    ui->infoLabel->setText("文件A路径改变");
+    ui->infoLabel->setStyleSheet("color:red;");
 
 }
 
 
 void MainWindow::on_pathBLineEdit_textEdited(const QString &arg1)
 {
-    qDebug()<<"textEdited";
+    ui->infoLabel->setText("文件B路径改变");
+    ui->infoLabel->setStyleSheet("color:red;");
 }
 
 
