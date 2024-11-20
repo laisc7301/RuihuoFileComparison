@@ -192,6 +192,7 @@ void MainWindow::on_pushButton_clicked()
     ui->outputTextBrowser->append("<b>456</b>");
 
 }
+// 拖拽进入事件
 
 
 void MainWindow::on_resetButton_clicked()
