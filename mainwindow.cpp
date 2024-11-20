@@ -188,3 +188,12 @@ void MainWindow::on_pushButton_clicked()
 
 }
 
+
+void MainWindow::on_resetButton_clicked()
+{
+    ui->pathALabel->clear();
+    ui->pathBLabel->clear();
+    ui->infoLabel->setText("");
+    ui->progressBar->setValue(0);
+}
+
