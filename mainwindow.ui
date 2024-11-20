@@ -30,7 +30,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="pathALineEdit">
+         <widget class="DragLineEdit" name="pathALineEdit">
           <property name="text">
            <string>C:\工作区\Workspace\tt1.png</string>
           </property>
@@ -134,6 +134,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DragLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>draglineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
