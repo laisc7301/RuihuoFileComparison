@@ -159,7 +159,7 @@ end1:;
 
 
     QPointer<QPushButton> button = ui->startComparingButton;
-    QTimer::singleShot(20, [button]() {
+    QTimer::singleShot(50, [button]() {
         if (button) {
             button->setText("开始对比");
             button->setStyleSheet("background-color: #ffffff;");
