@@ -27,9 +27,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_startComparingButton_clicked()
 {
     ui->startComparingButton->setEnabled(false);
+    ui->resetButton->setEnabled(false);
     ui->startComparingButton->setStyleSheet("background-color: #99a3a4;");
     ui->startComparingButton->setText("正在对比...");
     ui->infoLabel->setText("");
+    ui->resetButton->setStyleSheet("background-color: #99a3a4;");
 
     this->repaint(); // 立即刷新
 
@@ -109,7 +111,7 @@ void MainWindow::on_startComparingButton_clicked()
                 goto JumpOutComparison;
             }
             frequency++;
-            QThread::msleep(100); // 毫秒级
+            QThread::msleep(300); // 毫秒级
         }
         // 如果文件完全相同
         ui->progressBar->setValue(100);
@@ -161,11 +163,14 @@ end1:;
 
 
     QPointer<QPushButton> button = ui->startComparingButton;
-    QTimer::singleShot(50, [button]() {
+    QPointer<QPushButton> resetbutton = ui->resetButton;
+    QTimer::singleShot(50, [button,resetbutton]() {
         if (button) {
             button->setText("开始对比");
             button->setStyleSheet("background-color: #ffffff;");
+            resetbutton->setStyleSheet("background-color: #ffffff;");
             button->setEnabled(true);
+            resetbutton->setEnabled(true);
             qDebug() << "工作完成！";
         }
     });
@@ -191,9 +196,10 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_resetButton_clicked()
 {
-    ui->pathALabel->clear();
-    ui->pathBLabel->clear();
+    ui->pathALineEdit->clear();
+    ui->pathBLineEdit->clear();
     ui->infoLabel->setText("");
     ui->progressBar->setValue(0);
+    ui->outputTextBrowser->clear();
 }
 
