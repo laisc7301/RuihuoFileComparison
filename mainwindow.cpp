@@ -47,9 +47,6 @@ void MainWindow::on_startComparingButton_clicked()
     QString pathA = ui->pathALineEdit->text();
     QString pathB = ui->pathBLineEdit->text();
 
-    //pathA = R"(C:\工作区\Workspace\test.txt)";
-    //pathB = R"(C:\工作区\Workspace\test2.txt)";
-
     //ui->pathALineEdit->setText(pathA);
     QFile fileA1(pathA);
     QFile fileB1(pathB);
@@ -100,7 +97,7 @@ void MainWindow::on_startComparingButton_clicked()
 
             qDebug() << scheduleInt;
             ui->progressBar->setValue(scheduleInt);
-            ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数);
+            ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
 
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";
@@ -111,7 +108,7 @@ void MainWindow::on_startComparingButton_clicked()
             frequency++;
             QThread::msleep(100); // 毫秒级
         }
-        // 如果文件完全相同，返回 true
+        // 如果文件完全相同
         ui->progressBar->setValue(100);
         qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
         ui->infoLabel->setText("完成！");
