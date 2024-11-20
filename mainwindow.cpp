@@ -57,14 +57,14 @@ void MainWindow::on_startComparingButton_clicked()
 
         // 尝试打开两个文件
         if (!fileA1.open(QIODevice::ReadOnly)) {
-            qWarning() << "无法打开文件1:" << pathA;
+
             ui->outputTextBrowser->append("无法打开文件A:"+pathA);
             this->repaint(); // 立即刷新
             goto end1;
 
         }
         if (!fileB1.open(QIODevice::ReadOnly)) {
-            qWarning() << "无法打开文件2:" << pathB;
+
             ui->outputTextBrowser->append("无法打开文件B:"+pathB);
             this->repaint(); // 立即刷新
             goto end1;
@@ -75,8 +75,9 @@ void MainWindow::on_startComparingButton_clicked()
 
         // 检查文件大小是否一致
         if (fileA1.size() != fileB1.size()) {
-            qDebug() << "文件大小不一致";
             ui->outputTextBrowser->append("文件大小不一致");
+            ui->outputTextBrowser->append("文件A大小="+QString::number(fileA1.size()));
+            ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size()));
             this->repaint(); // 立即刷新
             goto JumpOutComparison;
         }
@@ -112,7 +113,7 @@ void MainWindow::on_startComparingButton_clicked()
         }
         // 如果文件完全相同
         ui->progressBar->setValue(100);
-        qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
+        //qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
         ui->outputTextBrowser->append("文件一致");
         ui->infoLabel->setText("完成！");
         ifSame = true;
