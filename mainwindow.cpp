@@ -66,8 +66,11 @@ void MainWindow::on_startComparingButton_clicked()
     QCryptographicHash fileAHash(QCryptographicHash::Sha3_512);
     QCryptographicHash fileBHash(QCryptographicHash::Sha3_512);
 
+
     QString fileAHashString="";
     QString fileBHashString="";
+    QString outString="123";
+    QString outString2="123";
 
     if (fileA1.exists()&&fileB1.exists()) {
         //qDebug() << "找到文件:" << pathA;
@@ -142,7 +145,19 @@ void MainWindow::on_startComparingButton_clicked()
         fileAHashString = fileAHash.result().toHex();
         fileBHashString = fileBHash.result().toHex();
 
-        ui->outputTextBrowser->append("文件A SHA3-512值："+fileAHashString);
+        if(fileAHashString==fileBHashString&&false){
+            outString.clear();
+            outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileAHashString+"</td></tr></table>";
+            ui->outputTextBrowser->append(outString);
+            //ui->outputTextBrowser->append("文件 SHA3-512值："+fileAHashString);
+        }else{
+            outString2.clear();
+            outString2=ui->outputTextBrowser->toHtml();
+            outString2="<b><span style='color:red;font-size:24px;'>严重错误！</span></b>"+outString2;
+            ui->outputTextBrowser->setHtml(outString2);
+
+        }
+
         ui->infoLabel->setText("完成！");
         ifSame = true;
 
