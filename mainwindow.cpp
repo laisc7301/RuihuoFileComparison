@@ -44,7 +44,7 @@ void MainWindow::on_startComparingButton_clicked()
 
     this->repaint(); // 立即刷新
 
-    bool isFileSame = false;
+    bool isFileSame1 = false;
     bool isFileSame2 = true;
     ui->outputTextBrowser->clear();
     this->repaint(); // 立即刷新
@@ -130,7 +130,7 @@ void MainWindow::on_startComparingButton_clicked()
 
             if (isFileSame2&&(bufferA1 != bufferB1)) {
                 qDebug() << "文件不一致";
-                isFileSame=false;
+                isFileSame1=false;
                 isFileSame2=false;
                 ui->outputTextBrowser->append("文件不一致");
 
@@ -146,7 +146,7 @@ void MainWindow::on_startComparingButton_clicked()
 
         fileA1HashString = fileAHash.result().toHex();
         fileB1HashString = fileBHash.result().toHex();
-        if(isFileSame2||true){
+        if(isFileSame2&&false){
 
 
             if(fileA1HashString==fileB1HashString){
@@ -181,8 +181,8 @@ void MainWindow::on_startComparingButton_clicked()
 
         }else{
 
-            if(fileA1HashString==fileB1HashString&&false){
-                ui->outputTextBrowser->append("哈希碰撞！");
+            if(fileA1HashString==fileB1HashString||true){
+                ui->outputTextBrowser->append("<b><span style='color:red;font-size:24px;'>哈希碰撞！</span></b>");
                 outString.clear();
                 outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td></tr></table>";
                 ui->outputTextBrowser->append(outString);
@@ -211,7 +211,7 @@ void MainWindow::on_startComparingButton_clicked()
 
 
         ui->infoLabel->setText("完成！");
-        isFileSame = true;
+        isFileSame1 = true;
 
 
 
@@ -224,7 +224,7 @@ JumpOutComparison:;
 
         //qDebug() << "ok1122";
 
-        if (isFileSame){
+        if (isFileSame2){
             QString outputHtml = ui->outputTextBrowser->toHtml();
             ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outputHtml);
         }else{
