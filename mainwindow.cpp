@@ -135,20 +135,24 @@ void MainWindow::on_startComparingButton_clicked()
                 ui->outputTextBrowser->append("文件不一致");
                 ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
 
-                goto JumpOutComparison;
+                goto FileDifferent;
             }
+            isFileSame=true;
+            isFileSame2=true;
+            FileDifferent:
             frequency++;
             //QThread::msleep(300); // 毫秒级
         }
         // 如果文件完全相同
         ui->progressBar->setValue(100);
         //qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
+
+        fileA1HashString = fileAHash.result().toHex();
+        fileB1HashString = fileBHash.result().toHex();
         if(isFileSame){
 
         }
         ui->outputTextBrowser->append("文件一致");
-        fileA1HashString = fileAHash.result().toHex();
-        fileB1HashString = fileBHash.result().toHex();
 
         if(fileA1HashString==fileB1HashString&&false){
             outString.clear();
