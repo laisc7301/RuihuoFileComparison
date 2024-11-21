@@ -186,7 +186,7 @@ void MainWindow::on_startComparingButton_clicked()
             fileB1Hash.addData(bufferB1);
 
 
-            qDebug() << 1.0*frequency*bufferSize/fileA1.size();
+
             double scheduleDouble = 1.0*frequency*bufferSize/fileA1.size()*100;
             int scheduleInt = qFloor(scheduleDouble);
             if(scheduleInt>100){
@@ -311,11 +311,6 @@ end1:;
     }else {
 
 
-        if(!fileB1.exists()){
-
-            ui->outputTextBrowser->append("文件B不存在:"+pathB);
-        }
-
         if(fileA1.exists()){
 
             if (!fileA1.open(QIODevice::ReadOnly)) {
@@ -323,21 +318,34 @@ end1:;
                 //return false;
             }
 
-            QCryptographicHash hash(QCryptographicHash::Sha3_512);
+            QCryptographicHash fileA2Hash(QCryptographicHash::Sha3_512);
 
             // 按块读取文件并更新哈希值
             while (!fileA1.atEnd()) {
                 QByteArray data = fileA1.read(bufferSize); // 每次读取 bufferSize KB
-                hash.addData(data);
+                fileA2Hash.addData(data);
             }
 
             // 关闭文件
             fileA1.close();
 
             // 哈希值的十六进制表示
-            QString hashString = hash.result().toHex();
+            QString hashString = fileA2Hash.result().toHex();
+
+            ui->outputTextBrowser->append("<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+hashString+"</td></tr></table>");
+
         }else{
             ui->outputTextBrowser->append("文件A不存在:"+pathA);
+        }
+
+
+
+
+        if(fileB1.exists()){
+
+
+        }else{
+            ui->outputTextBrowser->append("文件B不存在:"+pathB);
         }
 
     }
