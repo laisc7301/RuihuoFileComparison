@@ -105,7 +105,7 @@ void MainWindow::on_startComparingButton_clicked()
         }
 
 
-
+        ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
 
         // 对比文件内容
 
@@ -133,52 +133,82 @@ void MainWindow::on_startComparingButton_clicked()
                 isFileSame=false;
                 isFileSame2=false;
                 ui->outputTextBrowser->append("文件不一致");
-                ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
 
-                goto JumpOutComparison;
+                //goto JumpOutComparison;
             }
 
             frequency++;
             //QThread::msleep(300); // 毫秒级
         }
-        // 如果文件完全相同
+        // 对比完成！
         ui->progressBar->setValue(100);
         //qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
 
         fileA1HashString = fileAHash.result().toHex();
         fileB1HashString = fileBHash.result().toHex();
-        if(isFileSame){
+        if(isFileSame2||true){
 
-        }
-        ui->outputTextBrowser->append("文件一致");
 
-        if(fileA1HashString==fileB1HashString&&false){
-            outString.clear();
-            outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td></tr></table>";
-            ui->outputTextBrowser->append(outString);
+            if(fileA1HashString==fileB1HashString){
+                ui->outputTextBrowser->append("文件一致");
+
+                outString.clear();
+                outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td></tr></table>";
+                ui->outputTextBrowser->append(outString);
+            }else{
+                outString.clear();
+
+
+                outString+="<br/>";
+                outString+="<table>";
+                outString+="<tr>";
+                outString+="<td>文件A SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td>";
+                outString+="</tr>";
+                outString+="<tr>";
+                outString+="<td>文件B SHA3-512</td><td>=</td><td>"+fileB1HashString+"</td>";
+                outString+="</tr>";
+                outString+="</table>";
+                ui->outputTextBrowser->append(outString);
+
+
+                outString2.clear();
+                outString2=ui->outputTextBrowser->toHtml();
+                outString2="<b><span style='color:red;font-size:24px;'>严重错误：文件一致但哈希值不同！</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outString2;
+                ui->outputTextBrowser->setHtml(outString2);
+                goto end1;
+
+            }
+
         }else{
-            outString.clear();
+
+            if(fileA1HashString==fileB1HashString&&false){
+                ui->outputTextBrowser->append("哈希碰撞！");
+                outString.clear();
+                outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td></tr></table>";
+                ui->outputTextBrowser->append(outString);
+            }else{
+                outString.clear();
 
 
-            outString+="<br/>";
-            outString+="<table>";
-            outString+="<tr>";
-            outString+="<td>文件A SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td>";
-            outString+="</tr>";
-            outString+="<tr>";
-            outString+="<td>文件B SHA3-512</td><td>=</td><td>"+fileB1HashString+"</td>";
-            outString+="</tr>";
-            outString+="</table>";
-            ui->outputTextBrowser->append(outString);
+                outString+="<br/>";
+                outString+="<table>";
+                outString+="<tr>";
+                outString+="<td>文件A SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td>";
+                outString+="</tr>";
+                outString+="<tr>";
+                outString+="<td>文件B SHA3-512</td><td>=</td><td>"+fileB1HashString+"</td>";
+                outString+="</tr>";
+                outString+="</table>";
+                ui->outputTextBrowser->append(outString);
 
 
-            outString2.clear();
-            outString2=ui->outputTextBrowser->toHtml();
-            outString2="<b><span style='color:red;font-size:24px;'>严重错误：文件一致但哈希值不同！</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outString2;
-            ui->outputTextBrowser->setHtml(outString2);
-            goto end1;
+            }
+
 
         }
+
+
+
 
         ui->infoLabel->setText("完成！");
         isFileSame = true;
