@@ -110,6 +110,7 @@ void MainWindow::on_startComparingButton_clicked()
             bufferB1 = fileB1.read(bufferSize);
 
             fileAHash.addData(bufferA1);
+            fileBHash.addData(bufferB1);
 
 
             qDebug() << 1.0*frequency*bufferSize/fileA1.size();
@@ -138,8 +139,10 @@ void MainWindow::on_startComparingButton_clicked()
         ui->progressBar->setValue(100);
         //qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
         ui->outputTextBrowser->append("文件一致");
+        fileAHashString = fileAHash.result().toHex();
+        fileBHashString = fileBHash.result().toHex();
 
-        ui->outputTextBrowser->append("文件");
+        ui->outputTextBrowser->append("文件A SHA3-512值："+fileAHashString);
         ui->infoLabel->setText("完成！");
         ifSame = true;
 
