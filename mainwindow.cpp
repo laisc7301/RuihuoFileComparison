@@ -7,6 +7,7 @@
 #include <QTimer>
 #include <QPointer>
 #include <QDateTime>
+#include <QCryptographicHash>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -51,8 +52,8 @@ void MainWindow::on_startComparingButton_clicked()
     QDateTime dateTime= QDateTime::currentDateTime();//获取系统当前的时间
     QString timeStr = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
 
-    QByteArray buffer1, buffer2;
-    const qint64 bufferSize = 4096; // 每次读取 4KB
+    QByteArray bufferA1, bufferB1;
+    const qint64 bufferSize = 8192; // 每次读取 8KB
     long frequency = 0;
 
     QString pathA = ui->pathALineEdit->text();
@@ -61,6 +62,12 @@ void MainWindow::on_startComparingButton_clicked()
     //ui->pathALineEdit->setText(pathA);
     QFile fileA1(pathA);
     QFile fileB1(pathB);
+
+    QCryptographicHash fileAHash(QCryptographicHash::Sha3_512);
+    QCryptographicHash fileBHash(QCryptographicHash::Sha3_512);
+
+    QString fileAHashString="";
+    QString fileBHashString="";
 
     if (fileA1.exists()&&fileB1.exists()) {
         //qDebug() << "找到文件:" << pathA;
@@ -94,11 +101,15 @@ void MainWindow::on_startComparingButton_clicked()
         }
 
 
+
+
         // 对比文件内容
 
         while (!fileA1.atEnd() && !fileB1.atEnd()) {
-            buffer1 = fileA1.read(bufferSize);
-            buffer2 = fileB1.read(bufferSize);
+            bufferA1 = fileA1.read(bufferSize);
+            bufferB1 = fileB1.read(bufferSize);
+
+            fileAHash.addData(bufferA1);
 
 
             qDebug() << 1.0*frequency*bufferSize/fileA1.size();
@@ -112,7 +123,7 @@ void MainWindow::on_startComparingButton_clicked()
             ui->progressBar->setValue(scheduleInt);
             ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
 
-            if (buffer1 != buffer2) {
+            if (bufferA1 != bufferB1) {
                 qDebug() << "文件不一致";
                 ui->outputTextBrowser->append("文件不一致");
                 ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
@@ -127,6 +138,8 @@ void MainWindow::on_startComparingButton_clicked()
         ui->progressBar->setValue(100);
         //qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
         ui->outputTextBrowser->append("文件一致");
+
+        ui->outputTextBrowser->append("文件");
         ui->infoLabel->setText("完成！");
         ifSame = true;
 
