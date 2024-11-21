@@ -84,8 +84,8 @@ void MainWindow::on_startComparingButton_clicked()
         // 检查文件大小是否一致
         if (fileA1.size() != fileB1.size()) {
             ui->outputTextBrowser->append("文件大小不一致");
-            ui->outputTextBrowser->append("文件A大小="+QString::number(fileA1.size()));
-            ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size()));
+            ui->outputTextBrowser->append("文件A大小="+QString::number(fileA1.size())+"字节");
+            ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size())+"字节");
             this->repaint(); // 立即刷新
             goto JumpOutComparison;
         }
@@ -112,12 +112,13 @@ void MainWindow::on_startComparingButton_clicked()
             if (buffer1 != buffer2) {
                 qDebug() << "文件不一致";
                 ui->outputTextBrowser->append("文件不一致");
+                ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
                 ui->progressBar->setValue(100);
                 ui->infoLabel->setText("完成！");
                 goto JumpOutComparison;
             }
             frequency++;
-            QThread::msleep(300); // 毫秒级
+            //QThread::msleep(300); // 毫秒级
         }
         // 如果文件完全相同
         ui->progressBar->setValue(100);
