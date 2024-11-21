@@ -128,18 +128,16 @@ void MainWindow::on_startComparingButton_clicked()
             ui->progressBar->setValue(scheduleInt);
             ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
 
-            if (bufferA1 != bufferB1) {
+            if (isFileSame2&&(bufferA1 != bufferB1)) {
                 qDebug() << "文件不一致";
                 isFileSame=false;
                 isFileSame2=false;
                 ui->outputTextBrowser->append("文件不一致");
                 ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
 
-                goto FileDifferent;
+                goto JumpOutComparison;
             }
-            isFileSame=true;
-            isFileSame2=true;
-            FileDifferent:
+
             frequency++;
             //QThread::msleep(300); // 毫秒级
         }
