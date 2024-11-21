@@ -106,6 +106,7 @@ void MainWindow::on_startComparingButton_clicked()
             QByteArray bufferA2, bufferB2;
             //const qint64 bufferSize = 8192; // 每次读取 8KB
             long frequencyA2 = 0;
+            QString fileA2HashString="";
 
 
             while (!fileA1.atEnd()){
@@ -115,10 +116,17 @@ void MainWindow::on_startComparingButton_clicked()
                 double scheduleDouble = 1.0*frequencyA2*bufferSize/fileA1.size()*100;
                 int scheduleInt = qFloor(scheduleDouble);
 
-                ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->infoLabel->setText("正在文件A哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
                 ui->progressBar->setValue(scheduleInt);
+                frequencyA2++;
 
             }
+            fileA2HashString = fileA2Hash.result().toHex();
+
+            outString.clear();
+            outString+="<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+fileA2HashString+"</td></tr></table>";
+            ui->outputTextBrowser->append(outString);
+
 
 
 
@@ -167,7 +175,7 @@ void MainWindow::on_startComparingButton_clicked()
             }
 
             frequency++;
-            QThread::msleep(1000); // 毫秒级
+            //QThread::msleep(1000); // 毫秒级
         }
         // 对比完成！
         ui->progressBar->setValue(100);
