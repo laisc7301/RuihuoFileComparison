@@ -27,6 +27,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_startComparingButton_clicked()
 {
+    QElapsedTimer timer;
+    timer.start(); // 开始计时
     ui->startComparingButton->setEnabled(false);
     ui->resetButton->setEnabled(false);
     ui->pathALineEdit->setEnabled(false);
@@ -86,6 +88,7 @@ void MainWindow::on_startComparingButton_clicked()
             ui->outputTextBrowser->append("文件大小不一致");
             ui->outputTextBrowser->append("文件A大小="+QString::number(fileA1.size())+"字节");
             ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size())+"字节");
+            ui->infoLabel->setText("完成！");
             this->repaint(); // 立即刷新
             goto JumpOutComparison;
         }
@@ -134,7 +137,6 @@ void MainWindow::on_startComparingButton_clicked()
         //FileInconsistency:;
 
 JumpOutComparison:;
-
 
 
         //qDebug() << "ok1122";
@@ -188,8 +190,8 @@ end1:;
 
     });
 
-
-
+    ui->outputTextBrowser->append("代码运行时间:"+QString::number(timer.elapsed())+"ms");
+    qDebug() << "代码运行时间（毫秒）:" << timer.elapsed();
     //ui->startComparingButton->setEnabled(true);
 }
 
