@@ -64,8 +64,10 @@ void MainWindow::on_startComparingButton_clicked()
     QFile fileA1(pathA);
     QFile fileB1(pathB);
 
-    QCryptographicHash fileAHash(QCryptographicHash::Sha3_512);
-    QCryptographicHash fileBHash(QCryptographicHash::Sha3_512);
+    QCryptographicHash fileA1Hash(QCryptographicHash::Sha3_512);
+    QCryptographicHash fileB1Hash(QCryptographicHash::Sha3_512);
+    QCryptographicHash fileA2Hash(QCryptographicHash::Sha3_512);
+    QCryptographicHash fileB2Hash(QCryptographicHash::Sha3_512);
 
 
     QString fileA1HashString="";
@@ -101,6 +103,24 @@ void MainWindow::on_startComparingButton_clicked()
             ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size())+"字节");
 
 
+            QByteArray bufferA2, bufferB2;
+            //const qint64 bufferSize = 8192; // 每次读取 8KB
+            long frequencyA2 = 0;
+
+
+            while (!fileA1.atEnd()){
+
+                bufferA2 = fileA1.read(bufferSize);
+                fileA2Hash.addData(bufferA2);
+                double scheduleDouble = 1.0*frequencyA2*bufferSize/fileA1.size()*100;
+                int scheduleInt = qFloor(scheduleDouble);
+
+                ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->progressBar->setValue(scheduleInt);
+
+            }
+
+
 
 
 
@@ -122,8 +142,8 @@ void MainWindow::on_startComparingButton_clicked()
             bufferA1 = fileA1.read(bufferSize);
             bufferB1 = fileB1.read(bufferSize);
 
-            fileAHash.addData(bufferA1);
-            fileBHash.addData(bufferB1);
+            fileA1Hash.addData(bufferA1);
+            fileB1Hash.addData(bufferB1);
 
 
             qDebug() << 1.0*frequency*bufferSize/fileA1.size();
@@ -134,8 +154,8 @@ void MainWindow::on_startComparingButton_clicked()
             }
 
             qDebug() << scheduleInt;
-            ui->progressBar->setValue(scheduleInt);
             ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+            ui->progressBar->setValue(scheduleInt);
 
             if (isFileSame2&&(bufferA1 != bufferB1)) {
                 qDebug() << "文件不一致";
@@ -147,14 +167,14 @@ void MainWindow::on_startComparingButton_clicked()
             }
 
             frequency++;
-            //QThread::msleep(300); // 毫秒级
+            QThread::msleep(1000); // 毫秒级
         }
         // 对比完成！
         ui->progressBar->setValue(100);
         //qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
 
-        fileA1HashString = fileAHash.result().toHex();
-        fileB1HashString = fileBHash.result().toHex();
+        fileA1HashString = fileA1Hash.result().toHex();
+        fileB1HashString = fileB1Hash.result().toHex();
         if(isFileSame2){
 
 
