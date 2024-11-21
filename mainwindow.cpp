@@ -98,6 +98,7 @@ void MainWindow::on_startComparingButton_clicked()
 
         // 检查文件大小是否一致
         if (fileA1.size() != fileB1.size()) {
+            isFileSame2=false;
             ui->outputTextBrowser->append("文件大小不一致");
             ui->outputTextBrowser->append("文件A大小="+QString::number(fileA1.size())+"字节");
             ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size())+"字节");
@@ -106,7 +107,9 @@ void MainWindow::on_startComparingButton_clicked()
             QByteArray bufferA2, bufferB2;
             //const qint64 bufferSize = 8192; // 每次读取 8KB
             long frequencyA2 = 0;
+            long frequencyB2 = 0;
             QString fileA2HashString="";
+            QString fileB2HashString="";
 
 
             while (!fileA1.atEnd()){
@@ -116,7 +119,7 @@ void MainWindow::on_startComparingButton_clicked()
                 double scheduleDouble = 1.0*frequencyA2*bufferSize/fileA1.size()*100;
                 int scheduleInt = qFloor(scheduleDouble);
 
-                ui->infoLabel->setText("正在文件A哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->infoLabel->setText("正在计算文件A哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
                 ui->progressBar->setValue(scheduleInt);
                 frequencyA2++;
 
@@ -125,6 +128,24 @@ void MainWindow::on_startComparingButton_clicked()
 
             outString.clear();
             outString+="<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+fileA2HashString+"</td></tr></table>";
+            ui->outputTextBrowser->append(outString);
+
+            while (!fileB1.atEnd()){
+
+                bufferB2 = fileB1.read(bufferSize);
+                fileB2Hash.addData(bufferB2);
+                double scheduleDouble = 1.0*frequencyB2*bufferSize/fileA1.size()*100;
+                int scheduleInt = qFloor(scheduleDouble);
+
+                ui->infoLabel->setText("正在计算文件B哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->progressBar->setValue(scheduleInt);
+                frequencyB2++;
+
+            }
+            fileB2HashString = fileB2Hash.result().toHex();
+
+            outString.clear();
+            outString+="<table><tr><td>文件B SHA3-512</td><td>=</td><td>"+fileB2HashString+"</td></tr></table>";
             ui->outputTextBrowser->append(outString);
 
 
