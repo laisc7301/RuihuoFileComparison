@@ -32,7 +32,7 @@
         <item>
          <widget class="DragLineEdit" name="pathALineEdit">
           <property name="text">
-           <string>C:\工作区\Workspace\tt1.png</string>
+           <string>C:\工作区\Workspace\m1.mp4</string>
           </property>
          </widget>
         </item>
@@ -50,7 +50,7 @@
         <item>
          <widget class="DragLineEdit" name="pathBLineEdit">
           <property name="text">
-           <string>C:\工作区\Workspace\tt2.png</string>
+           <string>C:\工作区\Workspace\m2.mp4</string>
           </property>
          </widget>
         </item>
