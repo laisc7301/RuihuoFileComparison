@@ -153,8 +153,9 @@ void MainWindow::on_startComparingButton_clicked()
         }else{
             outString2.clear();
             outString2=ui->outputTextBrowser->toHtml();
-            outString2="<b><span style='color:red;font-size:24px;'>严重错误！</span></b>"+outString2;
+            outString2="<b><span style='color:red;font-size:24px;'>严重错误：文件一致但哈希值不同！</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outString2;
             ui->outputTextBrowser->setHtml(outString2);
+            goto end1;
 
         }
 
