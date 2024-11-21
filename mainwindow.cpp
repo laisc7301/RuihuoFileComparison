@@ -44,7 +44,8 @@ void MainWindow::on_startComparingButton_clicked()
 
     this->repaint(); // 立即刷新
 
-    bool ifSame = false;
+    bool isFileSame = false;
+    bool isFileSame2 = true;
     ui->outputTextBrowser->clear();
     this->repaint(); // 立即刷新
     //QThread::msleep(1000); // 毫秒级
@@ -67,8 +68,8 @@ void MainWindow::on_startComparingButton_clicked()
     QCryptographicHash fileBHash(QCryptographicHash::Sha3_512);
 
 
-    QString fileAHashString="";
-    QString fileBHashString="";
+    QString fileA1HashString="";
+    QString fileB1HashString="";
     QString outString="123";
     QString outString2="123";
 
@@ -129,33 +130,11 @@ void MainWindow::on_startComparingButton_clicked()
 
             if (bufferA1 != bufferB1) {
                 qDebug() << "文件不一致";
+                isFileSame=false;
+                isFileSame2=false;
                 ui->outputTextBrowser->append("文件不一致");
                 ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
 
-
-                QFile fileA2(pathA);
-                if (!fileA2.open(QIODevice::ReadOnly)) {
-                    qWarning() << "无法打开文件A：" << pathA;
-                    //return false;
-                }
-
-                QCryptographicHash hash(QCryptographicHash::Sha3_512);
-
-                // 按块读取文件并更新哈希值
-                while (!fileA2.atEnd()) {
-                    QByteArray data = fileA2.read(8192); // 每次读取 8 KB
-                    hash.addData(data);
-                }
-
-                // 关闭文件
-                fileA2.close();
-
-                // 哈希值的十六进制表示
-                QString hashString = hash.result().toHex();
-
-
-                ui->progressBar->setValue(100);
-                ui->infoLabel->setText("完成！");
                 goto JumpOutComparison;
             }
             frequency++;
@@ -164,13 +143,16 @@ void MainWindow::on_startComparingButton_clicked()
         // 如果文件完全相同
         ui->progressBar->setValue(100);
         //qDebug() << "文件一致" << fileA1.size() << ":"<<frequency;
-        ui->outputTextBrowser->append("文件一致");
-        fileAHashString = fileAHash.result().toHex();
-        fileBHashString = fileBHash.result().toHex();
+        if(isFileSame){
 
-        if(fileAHashString==fileBHashString&&false){
+        }
+        ui->outputTextBrowser->append("文件一致");
+        fileA1HashString = fileAHash.result().toHex();
+        fileB1HashString = fileBHash.result().toHex();
+
+        if(fileA1HashString==fileB1HashString&&false){
             outString.clear();
-            outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileAHashString+"</td></tr></table>";
+            outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td></tr></table>";
             ui->outputTextBrowser->append(outString);
         }else{
             outString.clear();
@@ -179,10 +161,10 @@ void MainWindow::on_startComparingButton_clicked()
             outString+="<br/>";
             outString+="<table>";
             outString+="<tr>";
-            outString+="<td>文件A SHA3-512</td><td>=</td><td>"+fileAHashString+"</td>";
+            outString+="<td>文件A SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td>";
             outString+="</tr>";
             outString+="<tr>";
-            outString+="<td>文件B SHA3-512</td><td>=</td><td>"+fileBHashString+"</td>";
+            outString+="<td>文件B SHA3-512</td><td>=</td><td>"+fileB1HashString+"</td>";
             outString+="</tr>";
             outString+="</table>";
             ui->outputTextBrowser->append(outString);
@@ -197,7 +179,7 @@ void MainWindow::on_startComparingButton_clicked()
         }
 
         ui->infoLabel->setText("完成！");
-        ifSame = true;
+        isFileSame = true;
 
 
 
@@ -210,7 +192,7 @@ JumpOutComparison:;
 
         //qDebug() << "ok1122";
 
-        if (ifSame){
+        if (isFileSame){
             QString outputHtml = ui->outputTextBrowser->toHtml();
             ui->outputTextBrowser->setHtml("<b><span style='color:green;font-size:24px;'>文件相同</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outputHtml);
         }else{
