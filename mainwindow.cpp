@@ -118,6 +118,9 @@ void MainWindow::on_startComparingButton_clicked()
                 fileA2Hash.addData(bufferA2);
                 double scheduleDouble = 1.0*frequencyA2*bufferSize/fileA1.size()*100;
                 int scheduleInt = qFloor(scheduleDouble);
+                if(scheduleInt>100){
+                    scheduleInt = 100;
+                }
 
                 ui->infoLabel->setText("正在计算文件A哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
                 ui->progressBar->setValue(scheduleInt);
@@ -136,6 +139,9 @@ void MainWindow::on_startComparingButton_clicked()
                 fileB2Hash.addData(bufferB2);
                 double scheduleDouble = 1.0*frequencyB2*bufferSize/fileA1.size()*100;
                 int scheduleInt = qFloor(scheduleDouble);
+                if(scheduleInt>100){
+                    scheduleInt = 100;
+                }
 
                 ui->infoLabel->setText("正在计算文件B哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
                 ui->progressBar->setValue(scheduleInt);
