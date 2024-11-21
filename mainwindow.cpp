@@ -122,7 +122,7 @@ void MainWindow::on_startComparingButton_clicked()
                     scheduleInt = 100;
                 }
 
-                ui->infoLabel->setText("正在计算文件A哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->infoLabel->setText("(1/2)正在计算文件A哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
                 ui->progressBar->setValue(scheduleInt);
                 frequencyA2++;
 
@@ -143,7 +143,7 @@ void MainWindow::on_startComparingButton_clicked()
                     scheduleInt = 100;
                 }
 
-                ui->infoLabel->setText("正在计算文件B哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->infoLabel->setText("(2/2)正在计算文件B哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
                 ui->progressBar->setValue(scheduleInt);
                 frequencyB2++;
 
@@ -153,6 +153,11 @@ void MainWindow::on_startComparingButton_clicked()
             outString.clear();
             outString+="<table><tr><td>文件B SHA3-512</td><td>=</td><td>"+fileB2HashString+"</td></tr></table>";
             ui->outputTextBrowser->append(outString);
+
+            if(fileA2HashString==fileB2HashString){
+                ui->outputTextBrowser->append("<b><span style='color:red;font-size:24px;'>哈希碰撞！</span></b>");
+
+            }
 
 
 
