@@ -131,6 +131,29 @@ void MainWindow::on_startComparingButton_clicked()
                 qDebug() << "文件不一致";
                 ui->outputTextBrowser->append("文件不一致");
                 ui->outputTextBrowser->append("文件大小="+QString::number(fileA1.size())+"字节");
+
+
+                QFile fileA2(pathA);
+                if (!fileA2.open(QIODevice::ReadOnly)) {
+                    qWarning() << "无法打开文件A：" << pathA;
+                    //return false;
+                }
+
+                QCryptographicHash hash(QCryptographicHash::Sha3_512);
+
+                // 按块读取文件并更新哈希值
+                while (!fileA2.atEnd()) {
+                    QByteArray data = fileA2.read(8192); // 每次读取 8 KB
+                    hash.addData(data);
+                }
+
+                // 关闭文件
+                fileA2.close();
+
+                // 哈希值的十六进制表示
+                QString hashString = hash.result().toHex();
+
+
                 ui->progressBar->setValue(100);
                 ui->infoLabel->setText("完成！");
                 goto JumpOutComparison;
@@ -149,10 +172,9 @@ void MainWindow::on_startComparingButton_clicked()
             outString.clear();
             outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileAHashString+"</td></tr></table>";
             ui->outputTextBrowser->append(outString);
-            //ui->outputTextBrowser->append("文件 SHA3-512值："+fileAHashString);
         }else{
             outString.clear();
-            outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileAHashString+"</td></tr></table>";
+
 
             outString+="<br/>";
             outString+="<table>";
@@ -163,6 +185,7 @@ void MainWindow::on_startComparingButton_clicked()
             outString+="<td>文件B SHA3-512</td><td>=</td><td>"+fileBHashString+"</td>";
             outString+="</tr>";
             outString+="</table>";
+            ui->outputTextBrowser->append(outString);
 
 
             outString2.clear();
@@ -204,13 +227,34 @@ end1:;
 
     }else {
 
-        if(!fileA1.exists()){
 
-            ui->outputTextBrowser->append("文件A不存在:"+pathA);
-        }
         if(!fileB1.exists()){
 
             ui->outputTextBrowser->append("文件B不存在:"+pathB);
+        }
+
+        if(fileA1.exists()){
+
+            if (!fileA1.open(QIODevice::ReadOnly)) {
+                qWarning() << "无法打开文件：" << pathA;
+                //return false;
+            }
+
+            QCryptographicHash hash(QCryptographicHash::Sha3_512);
+
+            // 按块读取文件并更新哈希值
+            while (!fileA1.atEnd()) {
+                QByteArray data = fileA1.read(bufferSize); // 每次读取 bufferSize KB
+                hash.addData(data);
+            }
+
+            // 关闭文件
+            fileA1.close();
+
+            // 哈希值的十六进制表示
+            QString hashString = hash.result().toHex();
+        }else{
+            ui->outputTextBrowser->append("文件A不存在:"+pathA);
         }
 
     }
@@ -284,11 +328,11 @@ void MainWindow::on_resetButton_clicked()
 
 
 
-QString calculateFileSHA3_512(const QString &filePath) {
+bool MainWindow::calculateFileASHA3_512(const QString &filePath) {
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly)) {
         qWarning() << "无法打开文件：" << filePath;
-        return QString();
+        return false;
     }
 
     QCryptographicHash hash(QCryptographicHash::Sha3_512);
@@ -302,10 +346,35 @@ QString calculateFileSHA3_512(const QString &filePath) {
     // 关闭文件
     file.close();
 
-    // 返回哈希值的十六进制表示
-    return hash.result().toHex();
+    // 哈希值的十六进制表示
+    QString hashString = hash.result().toHex();
+
+    return true;
 }
 
 
 
 
+bool MainWindow::calculateFileSHA3_512(const QString &fileAPath,const QString &fileBPath) {
+    QFile file(fileAPath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "无法打开文件：" << fileAPath;
+        return false;
+    }
+
+    QCryptographicHash hash(QCryptographicHash::Sha3_512);
+
+    // 按块读取文件并更新哈希值
+    while (!file.atEnd()) {
+        QByteArray data = file.read(8192); // 每次读取 8 KB
+        hash.addData(data);
+    }
+
+    // 关闭文件
+    file.close();
+
+    // 哈希值的十六进制表示
+    QString hashString = hash.result().toHex();
+
+    return true;
+}
