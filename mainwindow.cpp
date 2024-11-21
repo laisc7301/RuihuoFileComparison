@@ -151,6 +151,20 @@ void MainWindow::on_startComparingButton_clicked()
             ui->outputTextBrowser->append(outString);
             //ui->outputTextBrowser->append("文件 SHA3-512值："+fileAHashString);
         }else{
+            outString.clear();
+            outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileAHashString+"</td></tr></table>";
+
+            outString+="<br/>";
+            outString+="<table>";
+            outString+="<tr>";
+            outString+="<td>文件A SHA3-512</td><td>=</td><td>"+fileAHashString+"</td>";
+            outString+="</tr>";
+            outString+="<tr>";
+            outString+="<td>文件B SHA3-512</td><td>=</td><td>"+fileBHashString+"</td>";
+            outString+="</tr>";
+            outString+="</table>";
+
+
             outString2.clear();
             outString2=ui->outputTextBrowser->toHtml();
             outString2="<b><span style='color:red;font-size:24px;'>严重错误：文件一致但哈希值不同！</span></b><span style='color:blue;'>("+QString::number(numberOfComparisons)+")</span>&nbsp;"+timeStr+"<br/>"+outString2;
@@ -268,6 +282,29 @@ void MainWindow::on_resetButton_clicked()
 }
 
 
+
+
+QString calculateFileSHA3_512(const QString &filePath) {
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "无法打开文件：" << filePath;
+        return QString();
+    }
+
+    QCryptographicHash hash(QCryptographicHash::Sha3_512);
+
+    // 按块读取文件并更新哈希值
+    while (!file.atEnd()) {
+        QByteArray data = file.read(8192); // 每次读取 8 KB
+        hash.addData(data);
+    }
+
+    // 关闭文件
+    file.close();
+
+    // 返回哈希值的十六进制表示
+    return hash.result().toHex();
+}
 
 
 
