@@ -99,6 +99,15 @@ void MainWindow::on_startComparingButton_clicked()
             ui->outputTextBrowser->append("文件大小不一致");
             ui->outputTextBrowser->append("文件A大小="+QString::number(fileA1.size())+"字节");
             ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size())+"字节");
+
+
+
+
+
+
+
+
+
             ui->infoLabel->setText("完成！");
             this->repaint(); // 立即刷新
             goto JumpOutComparison;
@@ -146,7 +155,7 @@ void MainWindow::on_startComparingButton_clicked()
 
         fileA1HashString = fileAHash.result().toHex();
         fileB1HashString = fileBHash.result().toHex();
-        if(isFileSame2&&false){
+        if(isFileSame2){
 
 
             if(fileA1HashString==fileB1HashString){
@@ -181,7 +190,7 @@ void MainWindow::on_startComparingButton_clicked()
 
         }else{
 
-            if(fileA1HashString==fileB1HashString||true){
+            if(fileA1HashString==fileB1HashString){
                 ui->outputTextBrowser->append("<b><span style='color:red;font-size:24px;'>哈希碰撞！</span></b>");
                 outString.clear();
                 outString+="<table><tr><td>SHA3-512</td><td>=</td><td>"+fileA1HashString+"</td></tr></table>";
