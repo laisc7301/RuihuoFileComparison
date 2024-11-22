@@ -73,8 +73,8 @@ void MainWindow::on_startComparingButton_clicked()
 
     QString fileA1HashString="";
     QString fileB1HashString="";
-    QString outString="123";
-    QString outString2="123";
+    QString outString="";
+    QString outString2="";
 
     if (fileA1.exists()&&fileB1.exists()) {
         //qDebug() << "找到文件:" << pathA;
