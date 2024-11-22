@@ -151,7 +151,10 @@
         <item>
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>源代码</string>
+           <string>&lt;a href=&quot;https://github.com/laisc7301/RuihuoFileComparison&quot;&gt;源代码&lt;/a&gt;</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::RichText</enum>
           </property>
          </widget>
         </item>
@@ -188,7 +191,7 @@
         <item>
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>&lt;a href=&quot;https://laisc7301.github.io/&quot;&gt;作者博客&lt;/a&gt;</string>
+           <string>&lt;a href=&quot;https://laisc7301.github.io&quot;&gt;作者博客&lt;/a&gt;</string>
           </property>
           <property name="textFormat">
            <enum>Qt::RichText</enum>
