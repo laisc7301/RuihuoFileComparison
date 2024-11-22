@@ -311,12 +311,18 @@ end1:;
 
         if(!fileA1.exists()){
             ui->outputTextBrowser->append("文件A不存在:"+pathA);
+        }else{
+            ui->outputTextBrowser->append("文件A大小="+QString::number(fileA1.size())+"字节");
+
         }
 
 
 
         if(!fileB1.exists()){
             ui->outputTextBrowser->append("文件B不存在:"+pathB);
+        }else{
+            ui->outputTextBrowser->append("文件B大小="+QString::number(fileB1.size())+"字节");
+
         }
 
         if(fileA1.exists()){
@@ -329,12 +335,12 @@ end1:;
                 //return false;
             }
 
-            QCryptographicHash fileA2Hash(QCryptographicHash::Sha3_512);
+            QCryptographicHash fileA3Hash(QCryptographicHash::Sha3_512);
 
             // 按块读取文件并更新哈希值
             while (!fileA1.atEnd()) {
                 QByteArray data = fileA1.read(bufferSize); // 每次读取 bufferSize KB
-                fileA2Hash.addData(data);
+                fileA3Hash.addData(data);
 
                 double scheduleDouble = 1.0*frequencyA3*bufferSize/fileA1.size()*100;
                 int scheduleInt = qFloor(scheduleDouble);
@@ -351,7 +357,7 @@ end1:;
             fileA1.close();
 
             // 哈希值的十六进制表示
-            QString hashString = fileA2Hash.result().toHex();
+            QString hashString = fileA3Hash.result().toHex();
 
             ui->outputTextBrowser->append("<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+hashString+"</td></tr></table>");
 
@@ -363,8 +369,41 @@ end1:;
         if(fileB1.exists()){
 
 
-        }else{
-            ui->outputTextBrowser->append("文件B不存在:"+pathB);
+            long frequencyB3 = 0;
+            //long frequencyB2 = 0;
+
+            if (!fileB1.open(QIODevice::ReadOnly)) {
+                qWarning() << "无法打开文件：" << pathB;
+                //return false;
+            }
+
+            QCryptographicHash fileB3Hash(QCryptographicHash::Sha3_512);
+
+            // 按块读取文件并更新哈希值
+            while (!fileB1.atEnd()) {
+                QByteArray data = fileB1.read(bufferSize); // 每次读取 bufferSize KB
+                fileB3Hash.addData(data);
+
+                double scheduleDouble = 1.0*frequencyB3*bufferSize/fileB1.size()*100;
+                int scheduleInt = qFloor(scheduleDouble);
+                if(scheduleInt>100){
+                    scheduleInt = 100;
+                }
+
+                ui->infoLabel->setText("正在计算文件B哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->progressBar->setValue(scheduleInt);
+                frequencyB3++;
+            }
+
+            // 关闭文件
+            fileB1.close();
+
+            // 哈希值的十六进制表示
+            QString hashString = fileB3Hash.result().toHex();
+
+            ui->outputTextBrowser->append("<table><tr><td>文件B SHA3-512</td><td>=</td><td>"+hashString+"</td></tr></table>");
+
+
         }
 
 
@@ -434,6 +473,7 @@ void MainWindow::on_resetButton_clicked()
     ui->infoLabel->setText("");
     ui->progressBar->setValue(0);
     ui->outputTextBrowser->clear();
+    numberOfComparisons=0;
 }
 
 
