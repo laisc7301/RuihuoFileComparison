@@ -16,8 +16,7 @@ public:
     ~MainWindow();
 
     long numberOfComparisons = 0;
-    bool calculateFileASHA3_512(const QString &filePath);
-    bool calculateFileSHA3_512(const QString &fileAPath,const QString &fileBPath);
+
 
 
 private slots:
