@@ -12,3 +12,9 @@ AboutWindow::~AboutWindow()
 {
     delete ui;
 }
+
+void AboutWindow::on_closeButton_clicked()
+{
+    this->close();
+}
+
