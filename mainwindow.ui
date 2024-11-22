@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>750</width>
-    <height>544</height>
+    <width>591</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="acceptDrops">
@@ -109,7 +109,7 @@
          <widget class="QPushButton" name="aboutButton">
           <property name="maximumSize">
            <size>
-            <width>150</width>
+            <width>100</width>
             <height>16777215</height>
            </size>
           </property>
@@ -129,7 +129,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>750</width>
+     <width>591</width>
      <height>26</height>
     </rect>
    </property>
