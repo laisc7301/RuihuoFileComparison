@@ -192,7 +192,7 @@ void MainWindow::on_startComparingButton_clicked()
                 scheduleInt = 100;
             }
 
-            qDebug() << scheduleInt;
+            //qDebug() << scheduleInt;
             ui->infoLabel->setText("正在对比..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
             ui->progressBar->setValue(scheduleInt);
 
@@ -427,12 +427,12 @@ end1:;
         ui->pathBLineEdit->setStyleSheet("background-color: #ffffff;");
 
 
-        qDebug() << "工作完成！";
+        //qDebug() << "工作完成！";
 
     });
 
     ui->outputTextBrowser->append("代码运行时间:"+QString::number(timer.elapsed())+"ms");
-    qDebug() << "代码运行时间（毫秒）:" << timer.elapsed();
+    //qDebug() << "代码运行时间（毫秒）:" << timer.elapsed();
     //ui->startComparingButton->setEnabled(true);
 }
 
