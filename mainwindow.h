@@ -23,8 +23,6 @@ public:
 private slots:
     void on_startComparingButton_clicked();
 
-    void on_pushButton_clicked();
-
     void on_resetButton_clicked();
 
     void on_pathBLineEdit_textEdited(const QString &arg1);
