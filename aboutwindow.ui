@@ -188,7 +188,10 @@
         <item>
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>作者博客</string>
+           <string>&lt;a href=&quot;https://laisc7301.github.io/&quot;&gt;作者博客&lt;/a&gt;</string>
+          </property>
+          <property name="textFormat">
+           <enum>Qt::RichText</enum>
           </property>
          </widget>
         </item>
