@@ -470,7 +470,9 @@ void MainWindow::on_resetButton_clicked()
 {
     ui->pathALineEdit->clear();
     ui->pathBLineEdit->clear();
-    ui->infoLabel->setText("");
+    ui->infoLabel->clear();
+    ui->infoLabel->setStyleSheet("color:#000000;");
+
     ui->progressBar->setValue(0);
     ui->outputTextBrowser->clear();
     numberOfComparisons=0;
