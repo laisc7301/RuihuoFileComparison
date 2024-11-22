@@ -133,6 +133,8 @@ void MainWindow::on_startComparingButton_clicked()
             outString+="<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+fileA2HashString+"</td></tr></table>";
             ui->outputTextBrowser->append(outString);
 
+            this->repaint(); // 立即刷新
+
             while (!fileB1.atEnd()){
 
                 bufferB2 = fileB1.read(bufferSize);
@@ -153,6 +155,8 @@ void MainWindow::on_startComparingButton_clicked()
             outString.clear();
             outString+="<table><tr><td>文件B SHA3-512</td><td>=</td><td>"+fileB2HashString+"</td></tr></table>";
             ui->outputTextBrowser->append(outString);
+
+            this->repaint(); // 立即刷新
 
             if(fileA2HashString==fileB2HashString){
                 ui->outputTextBrowser->append("<b><span style='color:red;font-size:24px;'>哈希碰撞！</span></b>");
