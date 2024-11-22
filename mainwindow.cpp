@@ -166,12 +166,6 @@ void MainWindow::on_startComparingButton_clicked()
 
 
 
-
-
-
-
-
-
             ui->infoLabel->setText("完成！");
             this->repaint(); // 立即刷新
             goto JumpOutComparison;
@@ -315,7 +309,20 @@ end1:;
     }else {
 
 
+        if(!fileA1.exists()){
+            ui->outputTextBrowser->append("文件A不存在:"+pathA);
+        }
+
+
+
+        if(!fileB1.exists()){
+            ui->outputTextBrowser->append("文件B不存在:"+pathB);
+        }
+
         if(fileA1.exists()){
+
+            long frequencyA3 = 0;
+            //long frequencyB2 = 0;
 
             if (!fileA1.open(QIODevice::ReadOnly)) {
                 qWarning() << "无法打开文件：" << pathA;
@@ -328,6 +335,16 @@ end1:;
             while (!fileA1.atEnd()) {
                 QByteArray data = fileA1.read(bufferSize); // 每次读取 bufferSize KB
                 fileA2Hash.addData(data);
+
+                double scheduleDouble = 1.0*frequencyA3*bufferSize/fileA1.size()*100;
+                int scheduleInt = qFloor(scheduleDouble);
+                if(scheduleInt>100){
+                    scheduleInt = 100;
+                }
+
+                ui->infoLabel->setText("正在计算文件A哈希值..."+QString::number(scheduleDouble, 'f', 2)+"%"); // 保留两位小数;
+                ui->progressBar->setValue(scheduleInt);
+                frequencyA3++;
             }
 
             // 关闭文件
@@ -339,10 +356,8 @@ end1:;
             ui->outputTextBrowser->append("<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+hashString+"</td></tr></table>");
 
         }else{
-            ui->outputTextBrowser->append("文件A不存在:"+pathA);
+
         }
-
-
 
 
         if(fileB1.exists()){
@@ -351,6 +366,7 @@ end1:;
         }else{
             ui->outputTextBrowser->append("文件B不存在:"+pathB);
         }
+
 
     }
 
