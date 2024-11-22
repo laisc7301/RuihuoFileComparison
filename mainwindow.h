@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "aboutwindow.h" // 引入新窗体的头文件
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,7 +31,11 @@ private slots:
 
     void on_pathALineEdit_textEdited(const QString &arg1);
 
+    void on_aboutButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    AboutWindow *aboutWindow; // 新窗体的指针
+
 };
 #endif // MAINWINDOW_H

@@ -12,6 +12,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , aboutWindow(nullptr) // 初始化新窗体指针为 nullptr
 {
     ui->setupUi(this);
 }
@@ -480,4 +481,16 @@ void MainWindow::on_resetButton_clicked()
 
 
 
+
+
+void MainWindow::on_aboutButton_clicked()
+{
+    // 如果尚未创建新窗体，进行实例化
+    if (!aboutWindow) {
+        aboutWindow = new AboutWindow(this); // 设置主窗体为父对象
+    }
+    aboutWindow->show(); // 显示新窗体
+    aboutWindow->raise(); // 将窗体置于最前
+    aboutWindow->activateWindow(); // 激活窗口
+}
 
