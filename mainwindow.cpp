@@ -282,11 +282,9 @@ void MainWindow::on_startComparingButton_clicked()
 
         }
 
-
-
-
-        ui->infoLabel->setText("完成！");
         isFileSame1 = true;
+        ui->infoLabel->setText("完成！");
+        this->repaint(); // 立即刷新
 
 
 
