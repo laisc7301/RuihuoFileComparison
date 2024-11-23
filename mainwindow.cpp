@@ -132,9 +132,7 @@ void MainWindow::on_startComparingButton_clicked()
             ui->infoLabel->setText("(1/2)正在计算文件A哈希值...100%");
             ui->progressBar->setValue(100);
 
-            QThread::msleep(3000); // 毫秒级
-
-            //=================================
+            //QThread::msleep(3000); // 毫秒级
 
             outString.clear();
             outString+="<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+fileA2HashString+"</td></tr></table>";
@@ -158,6 +156,9 @@ void MainWindow::on_startComparingButton_clicked()
 
             }
             fileB2HashString = fileB2Hash.result().toHex();
+
+            ui->infoLabel->setText("(2/2)正在计算文件B哈希值...100%");
+            ui->progressBar->setValue(100);
 
             outString.clear();
             outString+="<table><tr><td>文件B SHA3-512</td><td>=</td><td>"+fileB2HashString+"</td></tr></table>";
