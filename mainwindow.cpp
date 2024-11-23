@@ -438,13 +438,14 @@ end1:;
         ui->startComparingButton->setText("开始对比");
         ui->startComparingButton->setStyleSheet("background-color: #ffffff;");
         ui->resetButton->setStyleSheet("background-color: #ffffff;");
+        ui->pathALineEdit->setStyleSheet("background-color: #ffffff;");
+        ui->pathBLineEdit->setStyleSheet("background-color: #ffffff;");
+
         ui->startComparingButton->setEnabled(true);
         ui->resetButton->setEnabled(true);
         ui->pathALineEdit->setEnabled(true);
         ui->pathBLineEdit->setEnabled(true);
 
-        ui->pathALineEdit->setStyleSheet("background-color: #ffffff;");
-        ui->pathBLineEdit->setStyleSheet("background-color: #ffffff;");
 
 
         //qDebug() << "工作完成！";
