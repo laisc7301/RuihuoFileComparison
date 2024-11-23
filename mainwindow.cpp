@@ -412,6 +412,12 @@ end1:;
 
         }
 
+        QThread::msleep(3000); // 毫秒级
+
+        ui->infoLabel->setText("完成！");
+
+        this->repaint(); // 立即刷新
+
 
     }
 
