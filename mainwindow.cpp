@@ -365,7 +365,11 @@ end1:;
             // 哈希值的十六进制表示
             QString hashString = fileA3Hash.result().toHex();
 
+            ui->infoLabel->setText("正在计算文件A哈希值...100%"); // 保留两位小数;
+            ui->progressBar->setValue(100);
+
             ui->outputTextBrowser->append("<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+hashString+"</td></tr></table>");
+            this->repaint(); // 立即刷新
 
         }else{
 
@@ -407,12 +411,17 @@ end1:;
             // 哈希值的十六进制表示
             QString hashString = fileB3Hash.result().toHex();
 
+            ui->infoLabel->setText("正在计算文件B哈希值...100%"); // 保留两位小数;
+            ui->progressBar->setValue(100);
+
             ui->outputTextBrowser->append("<table><tr><td>文件B SHA3-512</td><td>=</td><td>"+hashString+"</td></tr></table>");
+
+            this->repaint(); // 立即刷新
 
 
         }
 
-        QThread::msleep(3000); // 毫秒级
+        //QThread::msleep(3000); // 毫秒级
 
         ui->infoLabel->setText("完成！");
 
