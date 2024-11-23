@@ -129,6 +129,12 @@ void MainWindow::on_startComparingButton_clicked()
 
             }
             fileA2HashString = fileA2Hash.result().toHex();
+            ui->infoLabel->setText("(1/2)正在计算文件A哈希值...100%");
+            ui->progressBar->setValue(100);
+
+            QThread::msleep(3000); // 毫秒级
+
+            //=================================
 
             outString.clear();
             outString+="<table><tr><td>文件A SHA3-512</td><td>=</td><td>"+fileA2HashString+"</td></tr></table>";
