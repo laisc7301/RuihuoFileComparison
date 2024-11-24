@@ -498,6 +498,7 @@ void MainWindow::on_aboutButton_clicked()
     if (!aboutWindow) {
         aboutWindow = new AboutWindow(this); // 设置主窗体为父对象
     }
+    aboutWindow->setWindowFlags(Qt::Window | Qt::WindowCloseButtonHint);
     aboutWindow->show(); // 显示新窗体
     aboutWindow->raise(); // 将窗体置于最前
     aboutWindow->activateWindow(); // 激活窗口
